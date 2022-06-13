@@ -53,19 +53,17 @@ class _ConfirmPictureScreenState extends State<ConfirmPictureScreen> {
 
     User user = User.fromJson(dataMap);
 
-    // if (widget.plant != null) {
-    //   widget.plant?.addImage(widget.imagePath);
-    // } else {
-    //   // If is a new plant
-    //   Plant newPlant = Plant(widget.plantName);
-    //   newPlant.addImage(saveImagePath);
-    //   user.addPlant(newPlant);
-    // }
+    if (widget.plant != null) {
+      Plant plantToSave =
+          user.getPlantById('61b5e680-e071-11ec-9177-e779d3554968');
 
-    Plant plantToSave =
-        user.getPlantById('61b5e680-e071-11ec-9177-e779d3554968');
-
-    plantToSave.addImage(saveImagePath);
+      plantToSave.addImage(saveImagePath);
+    } else {
+      // If is a new plant
+      Plant newPlant = Plant(widget.plantName);
+      newPlant.addImage(saveImagePath);
+      user.addPlant(newPlant);
+    }
 
     try {
       print(jsonEncode(user));
